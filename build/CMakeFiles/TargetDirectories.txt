@@ -1,4 +1,0 @@
-/home/orfdia/Documents/Dev/C/build/CMakeFiles/list.dir
-/home/orfdia/Documents/Dev/C/build/CMakeFiles/graph.dir
-/home/orfdia/Documents/Dev/C/build/CMakeFiles/edit_cache.dir
-/home/orfdia/Documents/Dev/C/build/CMakeFiles/rebuild_cache.dir
