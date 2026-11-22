@@ -3,9 +3,6 @@
 
 #include "list.h"
 
-#define true 1
-#define false 0
-
 typedef struct weighted_graph {
   int vertex;
   int weight;
@@ -15,26 +12,41 @@ static wnode make_wnode(int vertex, int weight) {
   return (wnode){vertex, weight};
 }
 
-void make_weighted_connection(uint8_t bidirectional, wnode *node,
+bool make_weighted_connection(bool bidirectional, wnode *node,
                               int vertex_source, array_list *adjacency_list) {
   if (bidirectional) {
     wnode rnode = make_wnode(vertex_source, node->weight);
-    push_back(&rnode, adjacency_list->list[node->vertex]);
+    if (!push_back(&rnode, adjacency_list->list[node->vertex])) {
+      return 0;
+    }
   }
-  push_back(node, adjacency_list->list[vertex_source]);
+  if (!push_back(node, adjacency_list->list[vertex_source])) {
+    return 0;
+  }
+  return 1;
 }
 
-void make_connection(uint8_t bidirectional, int vertex_source,
-                     int vertex_destination, list **adjacency_list) {
+bool make_connection(bool bidirectional, int vertex_source,
+                     int vertex_destination, array_list *adjacency_list) {
   if (bidirectional) {
-    push_back(&vertex_source, adjacency_list[vertex_destination]);
+    if (!push_back(&vertex_source, adjacency_list->list[vertex_destination])) {
+      return 0;
+    }
   }
-  push_back(&vertex_destination, adjacency_list[vertex_source]);
+  if (!push_back(&vertex_destination, adjacency_list->list[vertex_source])) {
+    return 0;
+  }
+  return 1;
 }
 
-void dfs(list **adjacency_list, int vertex_source, uint8_t visited[]) {
+bool dfs(array_list *adjacency_list, int vertex_source, bool visited[]) {
   list *stack = init_list(sizeof(int));
-  push_front(&vertex_source, stack);
+  if (!stack) {
+    return 0;
+  }
+  if (push_front(&vertex_source, stack)) {
+    return 0;
+  }
   while (!empty(stack)) {
     int *vertex = front(stack);
     pop_front(stack);
@@ -42,41 +54,55 @@ void dfs(list **adjacency_list, int vertex_source, uint8_t visited[]) {
       continue;
     }
     visited[*vertex] = true;
-    for (list_node *cur = adjacency_list[*vertex]->list_tail; cur;
+    for (list_node *cur = adjacency_list->list[*vertex]->list_tail; cur;
          cur = cur->previous) {
       if (!visited[*(int *)cur->data]) {
-        push_front(cur->data, stack);
+        if (!push_front(cur->data, stack)) {
+          return 0;
+        }
       }
     }
   }
   free_list(stack);
+  return 1;
 }
 
-void bfs(list **adjacency_list, int vertex_source, uint8_t visited[]) {
+bool bfs(array_list *adjacency_list, int vertex_source, bool visited[]) {
   list *queue = init_list(sizeof(int));
+  if (!queue) {
+    return 0;
+  }
   visited[vertex_source] = true;
-  push_back(&vertex_source, queue);
+  if (!push_back(&vertex_source, queue)) {
+    return 0;
+  }
   while (!empty(queue)) {
     int *vertex = front(queue);
     pop_front(queue);
-    for (list_node *cur = adjacency_list[*vertex]->list_head; cur;
+    for (list_node *cur = adjacency_list->list[*vertex]->list_head; cur;
          cur = cur->next) {
       if (!visited[*(int *)cur->data]) {
-        push_back(cur->data, queue);
+        if (!push_back(cur->data, queue)) {
+          return 0;
+        }
         visited[*(int *)cur->data] = true;
       }
     }
   }
   free_list(queue);
+  return 1;
 }
 
 // void dijkstra(int vertex_source, int distances[], int predecessors[],
-//              list **adjacency_list) {}
+//               array_list *adjacency_list) {
+// }
 
 int main() {
   array_list *adjacency_list = init_array(5, sizeof(wnode));
   wnode a = {1, 23};
-  make_weighted_connection(1, &a, 0, adjacency_list);
+  if (!make_weighted_connection(true, &a, 0, adjacency_list)) {
+    return 1;
+  }
   printf("%d", ((wnode *)adjacency_list->list[1]->list_head->data)->weight);
   free_array_list(adjacency_list);
   return 0;

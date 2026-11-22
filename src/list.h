@@ -4,6 +4,8 @@
 #include <stddef.h>
 #include <stdint.h>
 
+#include "types.h"
+
 typedef struct link_list_node {
   void *data;
   struct link_list_node *next;
@@ -24,16 +26,16 @@ typedef struct array_list {
 
 array_list *init_array(size_t size_of_array, size_t element_size);
 list *init_list(size_t element_size);
-uint8_t push_back(void const *value, list *list);
-uint8_t push_front(void const *value, list *list);
+bool push_back(void const *value, list *list);
+bool push_front(void const *value, list *list);
 void pop(list *list);
 void pop_front(list *list);
-uint8_t empty(list const *list);
+bool empty(list const *list);
 void *front(list const *list);
 void *back(list const *list);
-uint8_t insert_after(void const *value, size_t position, list *list);
-uint8_t insert_before(void const *value, size_t position, list *list);
-uint8_t erase(size_t position, list *list);
+bool insert_after(void const *value, size_t position, list *list);
+bool insert_before(void const *value, size_t position, list *list);
+bool erase(size_t position, list *list);
 void free_list(list *list);
 void free_array_list(array_list *array_list);
 #endif // !LIST_H

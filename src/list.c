@@ -50,7 +50,7 @@ static list_node *constructor(void const *value, size_t element_size) {
   return new_node;
 }
 
-uint8_t push_back(void const *value, list *list) {
+bool push_back(void const *value, list *list) {
   list_node *new_node = constructor(value, list->element_size);
   if (!new_node) {
     return 0;
@@ -68,7 +68,7 @@ uint8_t push_back(void const *value, list *list) {
   return 1;
 }
 
-uint8_t push_front(void const *value, list *list) {
+bool push_front(void const *value, list *list) {
   list_node *new_node = constructor(value, list->element_size);
   if (!new_node) {
     return 0;
@@ -123,7 +123,7 @@ void pop_front(list *list) {
   list->length--;
 }
 
-uint8_t empty(list const *list) {
+bool empty(list const *list) {
   return !list->length;
 }
 
@@ -141,7 +141,7 @@ void *back(list const *list) {
   return list->list_tail->data;
 }
 
-uint8_t insert_after(void const *value, size_t const position, list *list) {
+bool insert_after(void const *value, size_t const position, list *list) {
   if (position >= list->length) {
     return 0;
   }
@@ -167,7 +167,7 @@ uint8_t insert_after(void const *value, size_t const position, list *list) {
   return 1;
 }
 
-uint8_t insert_before(void const *value, size_t const position, list *list) {
+bool insert_before(void const *value, size_t const position, list *list) {
   if (position >= list->length) {
     return 0;
   }
@@ -194,7 +194,7 @@ uint8_t insert_before(void const *value, size_t const position, list *list) {
   return 1;
 }
 
-uint8_t erase(size_t position, list *list) {
+bool erase(size_t position, list *list) {
   if (position >= list->length) {
     return 0;
   }
@@ -233,6 +233,7 @@ void free_list(list *list) {
   }
   free(list);
 }
+
 void free_array_list(array_list *array_list) {
   if (!array_list) {
     return;

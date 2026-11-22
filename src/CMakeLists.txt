@@ -11,7 +11,8 @@ project(graph
 )
 add_compile_options(-Wall -Wextra -fsanitize=address -g)
 add_link_options(-Wall -Wextra -fsanitize=address -g)
-
+add_library(types STATIC types.c)
 add_library(list STATIC list.c)
 add_executable(graph graph.c)
+target_link_libraries(types PRIVATE list)
 target_link_libraries(graph PRIVATE list)
