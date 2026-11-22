@@ -1,0 +1,38 @@
+[
+{
+  "directory": "/home/orfdia/Documents/Dev/C/build",
+  "command": "/usr/bin/clang -DCMAKE_INTDIR=\\\"Debug\\\" -g -std=gnu11 -Wall -Wextra -fsanitize=address -g -o CMakeFiles/list.dir/Debug/list.c.o -c /home/orfdia/Documents/Dev/C/src/list.c",
+  "file": "/home/orfdia/Documents/Dev/C/src/list.c",
+  "output": "/home/orfdia/Documents/Dev/C/build/CMakeFiles/list.dir/Debug/list.c.o"
+},
+{
+  "directory": "/home/orfdia/Documents/Dev/C/build",
+  "command": "/usr/bin/clang -DCMAKE_INTDIR=\\\"Release\\\" -O3 -DNDEBUG -std=gnu11 -Wall -Wextra -fsanitize=address -g -o CMakeFiles/list.dir/Release/list.c.o -c /home/orfdia/Documents/Dev/C/src/list.c",
+  "file": "/home/orfdia/Documents/Dev/C/src/list.c",
+  "output": "/home/orfdia/Documents/Dev/C/build/CMakeFiles/list.dir/Release/list.c.o"
+},
+{
+  "directory": "/home/orfdia/Documents/Dev/C/build",
+  "command": "/usr/bin/clang -DCMAKE_INTDIR=\\\"RelWithDebInfo\\\" -O2 -g -DNDEBUG -std=gnu11 -Wall -Wextra -fsanitize=address -g -o CMakeFiles/list.dir/RelWithDebInfo/list.c.o -c /home/orfdia/Documents/Dev/C/src/list.c",
+  "file": "/home/orfdia/Documents/Dev/C/src/list.c",
+  "output": "/home/orfdia/Documents/Dev/C/build/CMakeFiles/list.dir/RelWithDebInfo/list.c.o"
+},
+{
+  "directory": "/home/orfdia/Documents/Dev/C/build",
+  "command": "/usr/bin/clang -DCMAKE_INTDIR=\\\"Debug\\\" -g -std=gnu11 -Wall -Wextra -fsanitize=address -g -o CMakeFiles/graph.dir/Debug/graph.c.o -c /home/orfdia/Documents/Dev/C/src/graph.c",
+  "file": "/home/orfdia/Documents/Dev/C/src/graph.c",
+  "output": "/home/orfdia/Documents/Dev/C/build/CMakeFiles/graph.dir/Debug/graph.c.o"
+},
+{
+  "directory": "/home/orfdia/Documents/Dev/C/build",
+  "command": "/usr/bin/clang -DCMAKE_INTDIR=\\\"Release\\\" -O3 -DNDEBUG -std=gnu11 -Wall -Wextra -fsanitize=address -g -o CMakeFiles/graph.dir/Release/graph.c.o -c /home/orfdia/Documents/Dev/C/src/graph.c",
+  "file": "/home/orfdia/Documents/Dev/C/src/graph.c",
+  "output": "/home/orfdia/Documents/Dev/C/build/CMakeFiles/graph.dir/Release/graph.c.o"
+},
+{
+  "directory": "/home/orfdia/Documents/Dev/C/build",
+  "command": "/usr/bin/clang -DCMAKE_INTDIR=\\\"RelWithDebInfo\\\" -O2 -g -DNDEBUG -std=gnu11 -Wall -Wextra -fsanitize=address -g -o CMakeFiles/graph.dir/RelWithDebInfo/graph.c.o -c /home/orfdia/Documents/Dev/C/src/graph.c",
+  "file": "/home/orfdia/Documents/Dev/C/src/graph.c",
+  "output": "/home/orfdia/Documents/Dev/C/build/CMakeFiles/graph.dir/RelWithDebInfo/graph.c.o"
+}
+]

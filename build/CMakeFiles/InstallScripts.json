@@ -1,0 +1,11 @@
+{
+	"Configs" : 
+	[
+		"Debug"
+	],
+	"InstallScripts" : 
+	[
+		"/home/orfdia/Documents/Dev/C/build/cmake_install.cmake"
+	],
+	"Parallel" : false
+}
