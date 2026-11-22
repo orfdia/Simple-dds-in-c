@@ -1,54 +1,53 @@
-#include <stdint.h>
 #include <stdio.h>
 
 #include "list.h"
 
 typedef struct weighted_graph {
-  int vertex;
-  int weight;
+  u64 vertex;
+  i64 weight;
 } wnode;
 
-static wnode make_wnode(int vertex, int weight) {
+static inline wnode make_wnode(u64 vertex, i64 weight) {
   return (wnode){vertex, weight};
 }
 
 bool make_weighted_connection(bool bidirectional, wnode *node,
-                              int vertex_source, array_list *adjacency_list) {
+                              u64 vertex_source, array_list *adjacency_list) {
   if (bidirectional) {
     wnode rnode = make_wnode(vertex_source, node->weight);
     if (!push_back(&rnode, adjacency_list->list[node->vertex])) {
-      return 0;
+      return false;
     }
   }
   if (!push_back(node, adjacency_list->list[vertex_source])) {
-    return 0;
+    return false;
   }
-  return 1;
+  return true;
 }
 
-bool make_connection(bool bidirectional, int vertex_source,
-                     int vertex_destination, array_list *adjacency_list) {
+bool make_connection(bool bidirectional, u64 vertex_source,
+                     u64 vertex_destination, array_list *adjacency_list) {
   if (bidirectional) {
     if (!push_back(&vertex_source, adjacency_list->list[vertex_destination])) {
-      return 0;
+      return false;
     }
   }
   if (!push_back(&vertex_destination, adjacency_list->list[vertex_source])) {
-    return 0;
+    return false;
   }
-  return 1;
+  return true;
 }
 
-bool dfs(array_list *adjacency_list, int vertex_source, bool visited[]) {
-  list *stack = init_list(sizeof(int));
+bool dfs(array_list *adjacency_list, u64 vertex_source, bool visited[]) {
+  list *stack = init_list(sizeof(u64));
   if (!stack) {
-    return 0;
+    return false;
   }
   if (push_front(&vertex_source, stack)) {
-    return 0;
+    return false;
   }
   while (!empty(stack)) {
-    int *vertex = front(stack);
+    u64 *vertex = front(stack);
     pop_front(stack);
     if (visited[*vertex]) {
       continue;
@@ -56,36 +55,36 @@ bool dfs(array_list *adjacency_list, int vertex_source, bool visited[]) {
     visited[*vertex] = true;
     for (list_node *cur = adjacency_list->list[*vertex]->list_tail; cur;
          cur = cur->previous) {
-      if (!visited[*(int *)cur->data]) {
+      if (!visited[*(u64 *)cur->data]) {
         if (!push_front(cur->data, stack)) {
-          return 0;
+          return false;
         }
       }
     }
   }
   free_list(stack);
-  return 1;
+  return true;
 }
 
-bool bfs(array_list *adjacency_list, int vertex_source, bool visited[]) {
-  list *queue = init_list(sizeof(int));
+bool bfs(array_list *adjacency_list, u64 vertex_source, bool visited[]) {
+  list *queue = init_list(sizeof(u64));
   if (!queue) {
-    return 0;
+    return false;
   }
   visited[vertex_source] = true;
   if (!push_back(&vertex_source, queue)) {
-    return 0;
+    return false;
   }
   while (!empty(queue)) {
-    int *vertex = front(queue);
+    u64 *vertex = front(queue);
     pop_front(queue);
     for (list_node *cur = adjacency_list->list[*vertex]->list_head; cur;
          cur = cur->next) {
-      if (!visited[*(int *)cur->data]) {
+      if (!visited[*(u64 *)cur->data]) {
         if (!push_back(cur->data, queue)) {
-          return 0;
+          return false;
         }
-        visited[*(int *)cur->data] = true;
+        visited[*(u64 *)cur->data] = true;
       }
     }
   }
@@ -103,7 +102,7 @@ int main() {
   if (!make_weighted_connection(true, &a, 0, adjacency_list)) {
     return 1;
   }
-  printf("%d", ((wnode *)adjacency_list->list[1]->list_head->data)->weight);
+  printf(D64, ((wnode *)adjacency_list->list[1]->list_head->data)->weight);
   free_array_list(adjacency_list);
   return 0;
 }
