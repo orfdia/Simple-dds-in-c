@@ -1,6 +1,7 @@
 #include <stdio.h>
 
 #include "list.h"
+#include "vector.h"
 
 typedef struct weighted_graph {
   u64 vertex;
@@ -95,8 +96,12 @@ bool bfs(array_list *adjacency_list, u64 vertex_source, bool visited[]) {
 // void dijkstra(int vertex_source, int distances[], int predecessors[],
 //               array_list *adjacency_list) {
 // }
-
 int main() {
+  float *vector = NULL;
+  vector_init(vector, 1);
+  printf("%d", vector_is_empty(vector));
+  vector_push_back(vector, 10.0f);
+  printf("%f", vector[0]);
   array_list *adjacency_list = init_array(5, sizeof(wnode));
   wnode a = {1, 23};
   if (!make_weighted_connection(true, &a, 0, adjacency_list)) {
@@ -104,5 +109,6 @@ int main() {
   }
   printf(D64, ((wnode *)adjacency_list->list[1]->list_head->data)->weight);
   free_array_list(adjacency_list);
+  free_vector(vector);
   return 0;
 }

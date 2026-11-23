@@ -53,7 +53,6 @@ Checks: >
   -readability-redundant-nested-if,
   -readability-redundant-parentheses,
   -readability-redundant-qualified-alias,
-  -readability-redundant-typename,
   -readability-simplify-boolean-expr,
   -readability-static-accessed-through-instance,
   -readability-suspicious-call-argument,

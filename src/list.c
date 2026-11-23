@@ -53,7 +53,7 @@ static list_node *constructor(void const *value, size_t element_size) {
 bool push_back(void const *value, list *list) {
   list_node *new_node = constructor(value, list->element_size);
   if (!new_node) {
-    return 0;
+    return false;
   }
   new_node->previous = list->list_tail;
   list->length++;
@@ -65,13 +65,13 @@ bool push_back(void const *value, list *list) {
     list->list_tail->next = new_node;
     list->list_tail = new_node;
   }
-  return 1;
+  return true;
 }
 
 bool push_front(void const *value, list *list) {
   list_node *new_node = constructor(value, list->element_size);
   if (!new_node) {
-    return 0;
+    return false;
   }
 
   new_node->next = list->list_head;
@@ -85,7 +85,7 @@ bool push_front(void const *value, list *list) {
     list->list_head = new_node;
   }
 
-  return 1;
+  return true;
 }
 
 void pop(list *list) {
@@ -143,7 +143,7 @@ void *back(list const *list) {
 
 bool insert_after(void const *value, size_t const position, list *list) {
   if (position >= list->length) {
-    return 0;
+    return false;
   }
   list_node *current = list->list_head;
   size_t current_position = 0;
@@ -153,7 +153,7 @@ bool insert_after(void const *value, size_t const position, list *list) {
   }
   list_node *new_node = constructor(value, list->element_size);
   if (!new_node) {
-    return 0;
+    return false;
   }
   new_node->next = current->next;
   new_node->previous = current;
@@ -164,12 +164,12 @@ bool insert_after(void const *value, size_t const position, list *list) {
   }
   current->next = new_node;
   list->length++;
-  return 1;
+  return true;
 }
 
 bool insert_before(void const *value, size_t const position, list *list) {
   if (position >= list->length) {
-    return 0;
+    return false;
   }
   list_node *current = list->list_head;
   size_t current_position = 0;
@@ -180,7 +180,7 @@ bool insert_before(void const *value, size_t const position, list *list) {
   list_node *new_node = constructor(value, list->element_size);
 
   if (!new_node) {
-    return 0;
+    return false;
   }
   new_node->next = current;
   new_node->previous = current->previous;
@@ -191,12 +191,12 @@ bool insert_before(void const *value, size_t const position, list *list) {
   }
   current->previous = new_node;
   list->length++;
-  return 1;
+  return true;
 }
 
 bool erase(size_t position, list *list) {
   if (position >= list->length) {
-    return 0;
+    return false;
   }
   list_node *current = list->list_head;
   size_t current_position = 0;
@@ -217,7 +217,7 @@ bool erase(size_t position, list *list) {
   free(current->data);
   free(current);
   list->length--;
-  return 1;
+  return true;
 }
 
 void free_list(list *list) {

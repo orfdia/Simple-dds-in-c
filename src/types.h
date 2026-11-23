@@ -56,14 +56,3 @@ typedef uint64_t u64;
 #ifndef X8
 #define X8 "%" PRIx8 ""
 #endif
-
-// bool
-typedef uint8_t bool;
-
-#ifndef true
-#define true 1
-#endif
-
-#ifndef false
-#define false 0
-#endif
