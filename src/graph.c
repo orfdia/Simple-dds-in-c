@@ -98,10 +98,12 @@ bool bfs(array_list *adjacency_list, u64 vertex_source, bool visited[]) {
 // }
 int main() {
   float *vector = NULL;
-  vector_init(vector, 1);
+  vector_init(vector, 10);
+  vector_insert(vector, 0, 5.4f);
+  vector_push_back(vector, 3.4f);
+  vector_erase(vector, 0);
   printf("%d", vector_is_empty(vector));
-  vector_push_back(vector, 10.0f);
-  printf("%f", vector[0]);
+  printf("%f", vector[1]);
   array_list *adjacency_list = init_array(5, sizeof(wnode));
   wnode a = {1, 23};
   if (!make_weighted_connection(true, &a, 0, adjacency_list)) {
